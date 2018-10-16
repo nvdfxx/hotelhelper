@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <div id="nav">
-            <div class="navbar">
+            <div class="navbar navbar--black">
                 <div class="container">
                     <div class="navbar-content"><a class="header-logo" href="index.html">UImini</a>
                     <div class="button-burger"><span class="line line-1"></span><span class="line line-2"></span><span class="line line-3"></span></div>
@@ -26,7 +26,7 @@
 
 <script>
 
-import firebase from 'firebase'
+import firebase from 'firebase' 
 
 let config = {
     apiKey: "AIzaSyAg9Ti63dbIs9eNFUXIZNbqoGQEq-yjIrE",
@@ -69,24 +69,6 @@ export default {
 
 <style>
 
-    #app {
-        font-family: 'Avenir', Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-align: center;
-        color: #2c3e50;
-    }
-    #nav {
-        padding: 30px;
-    }
 
-    #nav a {
-        font-weight: bold;
-        color: #2c3e50;
-    }
-
-    #nav a.router-link-exact-active {
-        color: #42b983;
-    }
 
 </style>
