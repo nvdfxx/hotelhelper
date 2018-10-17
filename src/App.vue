@@ -1,26 +1,39 @@
 <template>
     <div id="app">
-        <div id="nav">
-            <div class="navbar navbar--black">
+        <div class="wrapper">
+            <header>
+                <div class="navbar navbar--black">
+                    <div class="container">
+                        <div class="navbar-content">
+                            <router-link to="/">HH</router-link>
+
+                            <div class="button-burger">
+                                <span class="line line-1"></span>
+                                <span class="line line-2"></span>
+                                <span class="line line-3"></span>
+                            </div>
+
+                            <div class="navbar-list__wrapper">
+                                <ul class="navbar-list">
+                                    <router-link to="/">Home</router-link>
+                                    <router-link to="/about">About</router-link>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-wrapper">
                 <div class="container">
-                    <div class="navbar-content"><a class="header-logo" href="index.html">UImini</a>
-                    <div class="button-burger"><span class="line line-1"></span><span class="line line-2"></span><span class="line line-3"></span></div>
-                    <div class="navbar-list__wrapper">
-                        <ul class="navbar-list">
-                        <li class="navbar-item"><a class="navbar-link" href="get-started.html">Documetation</a></li>
-                        <li class="navbar-item"><a class="navbar-link" href="changelog.html">Changelog</a></li>
-                        <li class="navbar-item"><a class="navbar-link" href="get-started.html">Download</a></li>
-                        </ul>
-                    </div>
-                    </div>
+                    <div class="button button--plain button-primary" @click="addData()">add</div>
+                
+                    <router-view/>
                 </div>
-                </div>
-            <router-link to="/">Home</router-link> | 
-            <router-link to="/about">About</router-link>
-            {{users}}
-        </div>
-        <button @click="addData()">add</button>
-        <router-view/>
+                
+            </div>
+
+        </div>             
     </div>
 </template>
 
