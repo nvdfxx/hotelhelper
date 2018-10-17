@@ -5,7 +5,7 @@
                 <div class="navbar navbar--black">
                     <div class="container">
                         <div class="navbar-content">
-                            <router-link to="/">HH</router-link>
+                            <router-link class="header-logo" to="/">HH</router-link>
 
                             <div class="button-burger">
                                 <span class="line line-1"></span>
@@ -15,8 +15,9 @@
 
                             <div class="navbar-list__wrapper">
                                 <ul class="navbar-list">
-                                    <router-link to="/">Home</router-link>
-                                    <router-link to="/about">About</router-link>
+                                    <li class="navbar-item"><router-link class="navbar-link" to="/">Home</router-link></li>
+                                    <li class="navbar-item"><router-link class="navbar-link" to="/about">About</router-link></li>
+                                   
                                 </ul>
                             </div>
                         </div>
@@ -27,7 +28,7 @@
             <div class="content-wrapper">
                 <div class="container">
                     <div class="button button--plain button-primary" @click="addData()">add</div>
-                
+                    
                     <router-view/>
                 </div>
                 
