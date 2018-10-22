@@ -61,7 +61,7 @@ export default {
         }
     },
     methods: {
-           
+
     },
     computed: {
         navRoutes() {
@@ -76,6 +76,13 @@ export default {
 
 
 <style>
+
+#app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
 
 .navbar-content a {color: #ffffff;}
 
