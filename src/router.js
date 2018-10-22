@@ -21,7 +21,8 @@ export default new Router({
       path: '/profile',
       name: 'profile',
       title: 'Мой кабинет',
-      component: Profile
+      component: Profile,
+      beforeEnter: authGuard
     },
     {
       path: '/signin',
@@ -37,3 +38,9 @@ export default new Router({
     }
   ]
 })
+
+function authGuard(from, to, next) {
+    console.log(from)
+    console.log(to)
+    console.log(next)
+}

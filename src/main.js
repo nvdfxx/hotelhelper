@@ -1,11 +1,13 @@
 import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
+import Vuelidate from 'vuelidate'
 import VueFire from 'vuefire'
 import Uimini from 'uimini/dist/css/uimini.css' 
 
-Vue.use(VueFire, Uimini)
+import router from './router'
+import store from './store'
+import App from './App.vue'
+
+Vue.use(Vuelidate, VueFire, Uimini)
 
 Vue.config.productionTip = false
 
