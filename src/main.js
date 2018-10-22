@@ -5,7 +5,7 @@ import store from './store'
 import VueFire from 'vuefire'
 import Uimini from 'uimini/dist/css/uimini.css' 
 
-Vue.use(VueFire)
+Vue.use(VueFire, Uimini)
 
 Vue.config.productionTip = false
 

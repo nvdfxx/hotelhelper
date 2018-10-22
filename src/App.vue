@@ -15,9 +15,9 @@
 
                             <div class="navbar-list__wrapper">
                                 <ul class="navbar-list">
-                                    <li class="navbar-item"><router-link class="navbar-link" to="/">Home</router-link></li>
-                                    <li class="navbar-item"><router-link class="navbar-link" to="/about">About</router-link></li>
-                                   
+                                    <li class="navbar-item" :key="route.name" v-for="route in this.$router.options.routes">
+                                        <router-link class="navbar-link" :to="route.path">{{route.title}}</router-link>
+                                    </li>                                
                                 </ul>
                             </div>
                         </div>
@@ -27,11 +27,8 @@
 
             <div class="content-wrapper">
                 <div class="container">
-                    <div class="button button--plain button-primary" @click="addData()">add</div>
-                    
                     <router-view/>
                 </div>
-                
             </div>
 
         </div>             
@@ -75,6 +72,13 @@ export default {
             });
             this.uCounter++
         }     
+    },
+    computed: {
+        navRoutes() {
+            this.$router.options.routes.forEach(route => {
+                return route.title
+            });
+        }
     }
 }
 
