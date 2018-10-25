@@ -64,11 +64,11 @@ export default {
 
     },
     computed: {
-        navRoutes() {
-            this.$router.options.routes.forEach(route => {
-                return route.title
-            });
-        }
+        // navRoutes() {
+        //     this.$router.options.routes.forEach(route => {
+        //         return route.title
+        //     });
+        // }
     }
 }
 

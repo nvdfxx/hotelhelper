@@ -25,16 +25,16 @@ export default new Router({
       beforeEnter: authGuard
     },
     {
-      path: '/signin',
-      name: 'signin',
-      title: 'Зарегистрироваться',
-      component: SignIn
-    },
-    {
       path: '/signup',
       name: 'signup',
-      title: 'Войти',
+      title: 'Зарегистрироваться',
       component: SignUp
+    },
+    {
+      path: '/signin',
+      name: 'signin',
+      title: 'Войти',
+      component: SignIn
     }
   ]
 })
