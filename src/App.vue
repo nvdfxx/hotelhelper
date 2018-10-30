@@ -54,7 +54,7 @@ export default {
         logout() {
             firebase.auth().signOut()
             .then(() => {
-                this.$store.dispatch('setUser', null) 
+                //this.$store.dispatch('setUser', null) //TODO: check for work it
                 this.$router.push('/signin')
             }).catch(e => console.log(e))
         }
@@ -78,16 +78,15 @@ export default {
 <style>
 
 #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    font-weight: normal;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale
+    font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .fade-enter-active, .fade-leave-active {
   transition: opacity .1s;
 }
-.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+.fade-enter, .fade-leave-to {
   opacity: 0;
 }
 
