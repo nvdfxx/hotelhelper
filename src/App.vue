@@ -19,7 +19,10 @@
                                 </li>    
                                 <li v-if="getUser" class="navbar-item">
                                     <a class="navbar-link" @click="logout">Выйти</a>
-                                </li>                    
+                                </li>      
+                                <li v-if="getUserEmail" class="navbar-item">
+                                    <a class="navbar-link">{{getUserEmail}}</a>
+                                </li>                 
                             </ul>
                         </div>
                     </div>
@@ -63,6 +66,9 @@ export default {
         getUser() {
             return this.$store.getters.getUser
         },
+        getUserEmail() {
+            return this.$store.getters.getUserEmail
+        },
         navRoutes() {
             if(this.getUser !== null) {
                 return this.$router.options.routes.filter(route => route.access);
@@ -78,7 +84,7 @@ export default {
 <style>
 
 #app {
-    font-family: "Avenir", Helvetica, Arial, sans-serif;
+   font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
