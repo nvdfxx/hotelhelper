@@ -23,7 +23,6 @@
                 <div class="buttons-list buttons-list--info">
                     <p class="typo__p" v-if="submitStatus === 'OK'">Спасибо за регистацию!</p>
                     <p class="typo__p" v-if="submitStatus === 'ERROR'">Заполните форму корректно!</p>
-                    <p class="typo__p" v-if="submitStatus === 'PENDING'">ОТПРАВКА...</p>
                 </div>
                 
             </form>
@@ -94,6 +93,10 @@ export default {
 
     button {
         border: none;
+    }
+
+    .alert-title {
+        font-size: 14px;
     }
 
     .form-item .error {

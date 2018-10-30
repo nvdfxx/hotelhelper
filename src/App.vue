@@ -14,9 +14,12 @@
 
                         <div class="navbar-list__wrapper">
                             <ul class="navbar-list">
-                                <li class="navbar-item" :key="route.name" v-for="route in this.$router.options.routes">
+                                <li class="navbar-item" :key="route.name" v-for="route in navRoutes">
                                     <router-link class="navbar-link" :to="route.path">{{route.title}}</router-link>
-                                </li>                                
+                                </li>    
+                                <li v-if="getUser" class="navbar-item">
+                                    <a class="navbar-link" @click="logout">Выйти</a>
+                                </li>                    
                             </ul>
                         </div>
                     </div>
@@ -26,7 +29,9 @@
         <div class="wrapper">
             <div class="content-wrapper">
                 <div class="container">
-                    <router-view/>
+                    <transition name="fade" mode="out-in">
+                        <router-view/>
+                    </transition>
                 </div>
             </div>
 
@@ -36,39 +41,34 @@
 
 <script>
 
-import firebase from 'firebase' 
-
-let config = {
-    apiKey: "AIzaSyAg9Ti63dbIs9eNFUXIZNbqoGQEq-yjIrE",
-    authDomain: "hotelhelper-d8b27.firebaseapp.com",
-    databaseURL: "https://hotelhelper-d8b27.firebaseio.com",
-    projectId: "hotelhelper-d8b27",
-    storageBucket: "hotelhelper-d8b27.appspot.com",
-    messagingSenderId: "36450160781"
-};
-
-let app = firebase.initializeApp(config);
-let db = app.database();
-let users = db.ref('users')
+import firebase from 'firebase'
 
 export default {
-    firebase: {
-        users: users
-    },
+    
     data() {
         return {
             uCounter: 1
         }
     },
     methods: {
-
+        logout() {
+            firebase.auth().signOut()
+            .then(() => {
+                this.$store.dispatch('setUser', null) 
+                this.$router.push('/signin')
+            }).catch(e => console.log(e))
+        }
     },
     computed: {
-        // navRoutes() {
-        //     this.$router.options.routes.forEach(route => {
-        //         return route.title
-        //     });
-        // }
+        getUser() {
+            return this.$store.getters.getUser
+        },
+        navRoutes() {
+            if(this.getUser !== null) {
+                return this.$router.options.routes.filter(route => route.access);
+            }
+            return this.$router.options.routes.filter(route => !route.access);
+        }
     }
 }
 
@@ -82,6 +82,13 @@ export default {
     font-weight: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .1s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
+  opacity: 0;
 }
 
 .navbar-content a {color: #ffffff;}

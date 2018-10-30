@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from './store/store'
 import Home from './views/Home.vue'
 import Profile from './views/Profile.vue'
 import SignIn from './views/SignIn.vue'
@@ -15,32 +16,36 @@ export default new Router({
       path: '/',
       name: 'home',
       title: 'Главная',
-      component: Home
+      component: Home,
+      access: true
     },
     {
       path: '/profile',
       name: 'profile',
       title: 'Мой кабинет',
       component: Profile,
-      beforeEnter: authGuard
+      access: true,
+      beforeEnter(from, to, next) {
+        if(store.getters.getUser !== null) {
+          next()
+        } else {
+          next('/signin')
+        }
+      }
     },
     {
       path: '/signup',
       name: 'signup',
       title: 'Зарегистрироваться',
-      component: SignUp
+      component: SignUp,
+      access: false
     },
     {
       path: '/signin',
       name: 'signin',
       title: 'Войти',
-      component: SignIn
+      component: SignIn,
+      access: false
     }
   ]
 })
-
-function authGuard(from, to, next) {
-    console.log(from)
-    console.log(to)
-    console.log(next)
-}

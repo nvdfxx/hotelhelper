@@ -1,5 +1,25 @@
 <template>
-  <div class="profile">
-    <h1>This is my profile page</h1>
+  <div>
+    Это страница профиля
   </div>
 </template>
+
+<script>
+  import firebase from 'firebase'
+
+  export default {
+    data() {
+      return {
+        
+      }
+    },
+    methods: {
+
+    }
+  }
+</script>
+
+<style>
+
+</style>
+
