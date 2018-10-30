@@ -30,7 +30,6 @@ new Vue({
         console.log('User is signed in')
         console.log(user)
         store.dispatch('setUser', user)
-        // ...
       } else {
         console.log('User is signed out')
         store.dispatch('clearUser')

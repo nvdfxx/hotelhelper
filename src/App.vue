@@ -20,11 +20,12 @@
                                 <li v-if="getUser" class="navbar-item">
                                     <a class="navbar-link" @click="logout">Выйти</a>
                                 </li>      
-                                <li v-if="getUserEmail" class="navbar-item">
-                                    <a class="navbar-link">{{getUserEmail}}</a>
+                                <li v-if="getUserNavLink" class="navbar-item">
+                                    <a class="navbar-link">{{getUserNavLink}}</a>
                                 </li>                 
                             </ul>
                         </div>
+                        <transition name="fade"><info-message v-if="getInfoMessage">{{getInfoMessage}}</info-message></transition>
                     </div>
                 </div>
             </div>
@@ -32,7 +33,7 @@
         <div class="wrapper">
             <div class="content-wrapper">
                 <div class="container">
-                    <transition name="fade" mode="out-in">
+                    <transition name="faded" mode="out-in">
                         <router-view/>
                     </transition>
                 </div>
@@ -45,12 +46,13 @@
 <script>
 
 import firebase from 'firebase'
+import infoMessage from '@/components/infoMessage.vue'
 
 export default {
     
     data() {
         return {
-            uCounter: 1
+            infoMessage: null
         }
     },
     methods: {
@@ -66,15 +68,27 @@ export default {
         getUser() {
             return this.$store.getters.getUser
         },
+        getUserName() {
+            return this.$store.getters.getUserName
+        },
         getUserEmail() {
             return this.$store.getters.getUserEmail
+        },
+        getUserNavLink() {
+            return this.getUserName ? this.getUserName : this.getUserEmail
         },
         navRoutes() {
             if(this.getUser !== null) {
                 return this.$router.options.routes.filter(route => route.access);
             }
             return this.$router.options.routes.filter(route => !route.access);
+        },
+        getInfoMessage() {
+            return this.$store.getters.getInfoMessage
         }
+    },
+    components: {
+      infoMessage
     }
 }
 
@@ -96,6 +110,17 @@ export default {
   opacity: 0;
 }
 
+.faded-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.faded-enter, .fade-leave-to {
+  opacity: 0;
+}
+
 .navbar-content a {color: #ffffff;}
+
+.ui-message {
+    display: block;
+}
 
 </style>
