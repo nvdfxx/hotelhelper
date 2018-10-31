@@ -1,5 +1,5 @@
 <template>
-    <div class="ui-message ui-message--success" id="exampleMessage2">
+    <div class="ui-message ui-message--success">
         <span class="message-title">
             <slot>
 
