@@ -23,13 +23,7 @@
                                 <li v-if="getUser" class="navbar-item">
                                     <a class="navbar-link" @click="logout">Выйти</a>
                                 </li>      
-<<<<<<< HEAD
                                              
-=======
-                                <li v-if="getUserNavLink" class="navbar-item">
-                                    <router-link class="navbar-link" to="/profile">{{getUserNavLink}}<img v-if="getUserPhoto" class="user-avatar" :src="getUserPhoto"></router-link>
-                                </li>                 
->>>>>>> 805ba7f241734018b157ac03e588fbe83491e4e1
                             </ul>
                         </div>
                         <transition name="fade"><info-message v-if="getInfoMessage">{{getInfoMessage}}</info-message></transition>
