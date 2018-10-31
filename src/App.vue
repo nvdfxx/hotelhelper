@@ -26,7 +26,7 @@
                                              
                             </ul>
                         </div>
-                        <transition name="fade"><info-message v-if="getInfoMessage">{{getInfoMessage}}</info-message></transition>
+                        <transition name="fadedown"><info-message v-if="getInfoMessage">{{getInfoMessage}}</info-message></transition>
                     </div>
                 </div>
             </div>
@@ -118,6 +118,15 @@ export default {
 }
 .faded-enter, .fade-leave-to {
   opacity: 0;
+}
+
+.fadedown-enter-active, .fadedown-leave-active {
+  transition: .5s;
+}
+.fadedown-enter, .fadedown-leave-to {
+  top: 0;
+  opacity: 0;
+  transition: .5s;
 }
 
 .navbar-content a {color: #ffffff;}

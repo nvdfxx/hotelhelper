@@ -39,7 +39,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="change-password">
+                <!-- <div class="change-password">
                     <h2 class="ui-title-2">Изменить пароль</h2>
                     <form @submit.prevent="checkOldPassword">
                         <div class="form-item">
@@ -58,7 +58,7 @@
                             <div class="error" v-if="!$v.repeatNewPassword.sameAsPassword">Пароли не совпадают!</div>
                         </div>
                     </form>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -73,9 +73,9 @@
       return {
         name: '',
         photoUrl: '',
-        oldPassword:'',
-        newPassword: '',
-        repeatNewPassword: '',
+        // oldPassword:'',
+        // newPassword: '',
+        // repeatNewPassword: '',
         submitStatus: '',
         fbError: ''
       }
@@ -85,13 +85,13 @@
             minLength: minLength(4), 
             required
         },
-        newPassword: {
-            required,
-            minLength: minLength(6)
-        },
-        repeatNewPassword: {
-            sameAsPassword: sameAs('password')
-        }
+        // newPassword: {
+        //     required,
+        //     minLength: minLength(6)
+        // },
+        // repeatNewPassword: {
+        //     sameAsPassword: sameAs('password')
+        // }
     },
     computed: {
         getUserName() {
@@ -122,7 +122,6 @@
               photoURL: this.photoUrl
             }).then(() => {
               this.$store.dispatch('updateUser', {name: vm.name, photoURL:  vm.photoUrl})
-              this.$router.push('/')
               this.$store.dispatch('setInfoMessage', 'Профиль  обновлен')
             }).catch(e => console.log(e))
         }

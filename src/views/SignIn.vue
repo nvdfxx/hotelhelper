@@ -17,6 +17,20 @@
                 
                 <button class="button button-primary" type="submit">Войти</button>
             </form>
+            <div class="forgot-password">
+                <p class="ui-text-small">Забыли пароль? <button @click="showResetPassword = !showResetPassword" class="button button-default">Восстановить пароль</button></p>
+                <transition name="fade">
+                    <form v-if="showResetPassword" @submit.prevent="resetPassword">
+                        <div class="form-item">
+                            <label>Введите адрес почты, к которой привязан аккаунт, на него прийдет сообщение с дальнейшими инструкциями</label>
+                            <input placeholder="Введите E-mail" type="email" v-model="resetPasswordEmail" >
+                            <!-- <div class="error" v-if="!$v.resetPasswordEmail.required">Поле E-mail обязательно для заполнения!</div>
+                            <div class="error" v-if="!$v.resetPasswordEmail.email">Заполните поле E-mail корректно!</div> -->
+                        </div>
+                        <button class="button button-warning" type="submit">Отправить письмо</button>
+                    </form>
+                </transition>
+            </div>
         </div>
     </div>
     
@@ -32,7 +46,9 @@ export default {
         return {    
             email: '',
             password: '',
-            fbError: ''
+            fbError: '',
+            resetPasswordEmail: '',
+            showResetPassword: false
         }
     },
     validations: {
@@ -43,6 +59,11 @@ export default {
         password: {
             required
         }
+        // resetPasswordEmail: {
+        //     required,
+        //     email
+        // }
+        
     },
     methods: {
         signUp() {
@@ -61,12 +82,44 @@ export default {
                     vm.fbError = error.message
                 });
             }
+        },
+        resetPassword() {
+            let vm = this
+            firebase.auth().sendPasswordResetEmail(vm.resetPasswordEmail)
+            .then(() => {
+                this.submitStatus = 'OK'    
+                this.$store.dispatch('setInfoMessage', 'Письмо отправлено на почтовый ящик ' + vm.resetPasswordEmail)
+            })
+            .catch(function(error) {
+                vm.fbError = error.message
+            });
         }
-    }
+    } 
 }
 </script>
 
 <style scoped>
+
+    .forgot-password {
+        margin-top: 30px;
+        color: #ffffff;
+    }
+
+    .forgot-password p {
+        color: #ffffff;
+    }
+
+    .forgot-password button {
+        margin-left: 10px;
+    }
+
+    .forgot-password form {
+        margin-top: 20px;
+    }
+
+    .forgot-password form .form-item label {
+        font-size: 12px;
+    }
 
     .row {
         margin-top: 150px;
