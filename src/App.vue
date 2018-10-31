@@ -21,7 +21,7 @@
                                     <a class="navbar-link" @click="logout">Выйти</a>
                                 </li>      
                                 <li v-if="getUserNavLink" class="navbar-item">
-                                    <a class="navbar-link">{{getUserNavLink}}</a>
+                                    <router-link class="navbar-link" to="/profile">{{getUserNavLink}}<img v-if="getUserPhoto" class="user-avatar" :src="getUserPhoto"></router-link>
                                 </li>                 
                             </ul>
                         </div>
@@ -59,7 +59,6 @@ export default {
         logout() {
             firebase.auth().signOut()
             .then(() => {
-                //this.$store.dispatch('setUser', null) //TODO: check for work it
                 this.$router.push('/signin')
             }).catch(e => console.log(e))
         }
@@ -76,6 +75,9 @@ export default {
         },
         getUserNavLink() {
             return this.getUserName ? this.getUserName : this.getUserEmail
+        },
+        getUserPhoto() {
+            return this.$store.getters.getUserPhoto
         },
         navRoutes() {
             if(this.getUser !== null) {
@@ -101,6 +103,7 @@ export default {
    font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: url('./assets/signin-bg.jpg') no-repeat center / cover
 }
 
 .fade-enter-active, .fade-leave-active {
@@ -121,6 +124,36 @@ export default {
 
 .ui-message {
     display: block;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 30px;
+    object-fit: cover
+}
+
+.navbar-list {
+    align-items: baseline;
+}
+
+.navbar-list__wrapper .navbar-item {
+    padding: 0;
+    height: 100%;
+    margin-right: 30px;
+}
+
+.navbar-list__wrapper .navbar-item:last-child {
+    margin-right: 0;
+}
+
+.navbar-list__wrapper .navbar-item a {
+    padding: 0;
+}
+
+form input:focus {
+    box-shadow: 0 0 50px #fff inset;
 }
 
 </style>
