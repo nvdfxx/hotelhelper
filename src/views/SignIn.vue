@@ -18,7 +18,7 @@
                 <button class="button button-primary" type="submit">Войти</button>
             </form>
             <div class="forgot-password">
-                <p class="ui-text-small">Забыли пароль? <button @click="showResetPassword = !showResetPassword" class="button button-default">Восстановить пароль</button></p>
+                <p class="ui-text-small">Забыли пароль? <button @click="showResetPassword = !showResetPassword" class="button button-default" :class="{'button--plain': showResetPassword }">Восстановить пароль</button></p>
                 <transition name="fade">
                     <form v-if="showResetPassword" @submit.prevent="resetPassword">
                         <div class="form-item">
