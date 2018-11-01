@@ -10,7 +10,10 @@ export default new Vuex.Store({
     userEmail: null,
     userName: null,
     userPhoto: null,
-    infoMessage: null
+    infoMessage: {
+      text: null,
+      color: null
+    } 
   },
   mutations: {
     SET_USER(state, payload) {
@@ -30,7 +33,12 @@ export default new Vuex.Store({
       state.userPhoto = payload.photoURL
     },
     SET_INFO_MESSAGE(state, payload) {
-      state.infoMessage = payload
+      state.infoMessage.text = payload.text
+      state.infoMessage.color = payload.color
+    },
+    CLEAR_INFO_MESSAGE(state) {
+      state.infoMessage.text = null
+      state.infoMessage.color = null
     }
   },
   actions: {
@@ -44,8 +52,22 @@ export default new Vuex.Store({
       commit('UPDATE_USER', payload)
     },
     setInfoMessage({commit}, payload) {
-      commit('SET_INFO_MESSAGE', payload)
-      setTimeout(() => commit('SET_INFO_MESSAGE', null), 2000)
+
+      let color = payload.color;
+      let colorToClass = () => {
+        switch(color) {
+          case 'primary': return 'ui-message--primary' 
+          case 'danger': return 'ui-message--danger'
+          case 'success': return 'ui-message--success'
+          case 'warning': return 'ui-message--warning'
+          default: return 'ui-message--primary'
+        }
+      }
+
+      let text = payload.text
+
+      commit('SET_INFO_MESSAGE', {text: text, color: colorToClass()})
+      setTimeout(() => commit('CLEAR_INFO_MESSAGE'), 3000)
     }
   },
   getters: {

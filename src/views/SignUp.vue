@@ -3,7 +3,7 @@
         <div class="col-xs-6">
             <h2 class="ui-title-2">Зарегистрироваться</h2>
             <div class="ui-alert ui-alert--danger" v-if="fbError != ''"><span class="alert-title">{{fbError}}</span></div>
-            <form @submit.prevent="signIn">
+            <form @submit.prevent="signUp">
                 <div class="form-item" :class="{errorInput: $v.email.$error}">
                     <input type="text" placeholder="E-mail" v-model="email" @change="$v.email.$touch()">
                     <div class="error" v-if="!$v.email.required">Поле E-mail обязательно для заполнения!</div>
@@ -62,7 +62,7 @@ export default {
         
     },
     methods: {
-        signIn() {
+        signUp() {
             this.$v.$touch();
             this.submitStatus = 'PENDING'
             if (this.$v.$invalid) {
@@ -70,13 +70,14 @@ export default {
             } else {
                 let vm = this;
                 firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
-                .then(user => {
-                    this.submitStatus = "OK";
-                    console.log(user.user.uid);
-                    this.$router.push('/');
+                .then(() => {
+                    vm.submitStatus = "OK";
+                    vm.$router.push('/');
+                    vm.$store.dispatch('setInfoMessage', {text: 'Регистрация успешно завершена!', color: 'success'})
                 })
                 .catch(function(error) {
-                    vm.fbError = error.message
+                    //vm.fbError = error.message;
+                    vm.$store.dispatch('setInfoMessage', {text: error.message, color: 'danger'})
                 });
             }
                 

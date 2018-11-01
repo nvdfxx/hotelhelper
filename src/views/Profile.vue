@@ -122,7 +122,7 @@
               photoURL: this.photoUrl
             }).then(() => {
               this.$store.dispatch('updateUser', {name: vm.name, photoURL:  vm.photoUrl})
-              this.$store.dispatch('setInfoMessage', 'Профиль  обновлен')
+              this.$store.dispatch('setInfoMessage', {text: 'Профиль  обновлен', color: 'success'})
             }).catch(e => console.log(e))
         }
       },

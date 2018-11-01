@@ -1,5 +1,5 @@
 <template>
-    <div class="ui-message ui-message--success">
+    <div class="ui-message" :class="color">
         <span class="message-title">
             <slot>
 
@@ -10,7 +10,12 @@
 
 <script>
     export default {
-
+        props: {
+            color: {
+                required: true,
+                type: String
+            }
+        }
     }
 </script>
 

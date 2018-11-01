@@ -26,7 +26,7 @@
                                              
                             </ul>
                         </div>
-                        <transition name="fadedown"><info-message v-if="getInfoMessage">{{getInfoMessage}}</info-message></transition>
+                        <transition name="fadedown"><info-message v-if="getInfoMessage.text" :color="getInfoMessage.color">{{getInfoMessage.text}}</info-message></transition>
                     </div>
                 </div>
             </div>
