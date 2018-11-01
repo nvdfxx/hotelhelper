@@ -72,7 +72,7 @@ export default {
                 firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
                 .then(() => {
                     vm.submitStatus = "OK";
-                    vm.$router.push('/');
+                    vm.$router.push('/profile');
                     vm.$store.dispatch('setInfoMessage', {text: 'Регистрация успешно завершена!', color: 'success'})
                 })
                 .catch(function(error) {

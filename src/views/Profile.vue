@@ -6,7 +6,7 @@
                 <div class="profile-card">
                     <div class="profile-avatar">
                         <img v-if="getUserPhoto" :src="getUserPhoto">
-                        <img v-else src="../assets/nophoto.jpg">
+                        <img v-else src="../assets/nophoto.png">
                     </div>
                     <div class="profile-name">
                         <h3 class="ui-title-3">{{getUserName}}</h3>
@@ -122,7 +122,7 @@
               photoURL: this.photoUrl
             }).then(() => {
               this.$store.dispatch('updateUser', {name: vm.name, photoURL:  vm.photoUrl})
-              this.$store.dispatch('setInfoMessage', {text: 'Профиль  обновлен', color: 'success'})
+              this.$store.dispatch('setInfoMessage', {text: 'Профиль  обновлен', color: 'primary'})
             }).catch(e => console.log(e))
         }
       },
