@@ -3,7 +3,8 @@ export default {
         infoMessage: {
             text: null,
             color: null
-        } 
+        },
+        appLoading: false
     },
     mutations: {
         SET_INFO_MESSAGE(state, payload) {
@@ -13,6 +14,12 @@ export default {
         CLEAR_INFO_MESSAGE(state) {
             state.infoMessage.text = null
             state.infoMessage.color = null
+        },
+        ON_APP_LOADING(state) {
+            state.appLoading = true
+        },
+        OFF_APP_LOADING(state) {
+            state.appLoading = false
         }
     },
     actions: {
@@ -32,9 +39,13 @@ export default {
     
         commit('SET_INFO_MESSAGE', {text: text, color: colorToClass()})
             setTimeout(() => commit('CLEAR_INFO_MESSAGE'), 3000)
-        }
+        },
+
+        onAppLoading({commit}) {commit('ON_APP_LOADING')},
+        offAppLoading({commit}) {commit('OFF_APP_LOADING')}
     },
     getters: {
-        getInfoMessage: state => state.infoMessage
+        getInfoMessage: state => state.infoMessage,
+        getAppLoading: state => state.appLoading
     }
 }

@@ -1,7 +1,7 @@
 <template>
     <div class="posts">
         <div class="row grid-center">
-            <add-post class="col-xs-8" />
+            <button class="button col-xs-8" @click="consolePosts">console</button>
             <post-list-item class="col-xs-8" :key="`${post.id}`" v-for="post in getPosts" :post="post"></post-list-item>
         </div>
     </div>
@@ -9,8 +9,10 @@
 
 <script>
 
+import Vue from 'vue'
 import postListItem from '../components/postListItem'
-import addPost from '../components/addPost'
+import firebase from 'firebase'
+
 
 export default {
     name: 'home',
@@ -22,7 +24,15 @@ export default {
         }
     },
     methods: {
-        
+        consolePosts() {
+            Vue.$db.collection('posts').get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    console.log(`${doc.id} => ${doc.data()}`); //TODO: FIX IT, NOT WORKING
+                });
+            })
+            .catch(e => console.log(e))
+        }
     },
     computed: {
         getUser() {
@@ -33,7 +43,6 @@ export default {
         }
     },
     components: {
-        addPost,
         postListItem
     }
 }

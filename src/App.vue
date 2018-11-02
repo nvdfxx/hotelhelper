@@ -1,5 +1,10 @@
 <template>
     <div id="app">
+        <transition name="fade">
+            <div id="app-loader" v-if="getAppLoading">
+                <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.0" width="64px" height="64px" viewBox="0 0 128 128" xml:space="preserve"><g><path d="M75.4 126.63a11.43 11.43 0 0 1-2.1-22.65 40.9 40.9 0 0 0 30.5-30.6 11.4 11.4 0 1 1 22.27 4.87h.02a63.77 63.77 0 0 1-47.8 48.05v-.02a11.38 11.38 0 0 1-2.93.37z" fill="#ffffff" fill-opacity="1"/><animateTransform attributeName="transform" type="rotate" from="0 64 64" to="360 64 64" dur="2000ms" repeatCount="indefinite"></animateTransform></g></svg>
+            </div>
+        </transition>
         <header>
             <div class="navbar navbar--black">
                 <div class="container">
@@ -36,7 +41,7 @@
         <div class="wrapper">
             <div class="content-wrapper">
                 <div class="container">
-                    <transition name="faded" mode="out-in">
+                    <transition name="fade" mode="out-in">
                         <router-view/>
                     </transition>
                 </div>
@@ -89,6 +94,9 @@ export default {
         },
         getInfoMessage() {
             return this.$store.getters.getInfoMessage
+        },
+        getAppLoading() {
+            return this.$store.getters.getAppLoading
         }
     },
     components: {
@@ -109,6 +117,21 @@ export default {
   background-attachment: fixed;
 }
 
+#app-loader {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 999;
+}
+
+#app-loader svg {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity .1s;
 }
@@ -116,10 +139,10 @@ export default {
   opacity: 0;
 }
 
-.faded-enter-active, .fade-leave-active {
+.faded-enter-active, .faded-leave-active {
   transition: opacity .5s;
 }
-.faded-enter, .fade-leave-to {
+.faded-enter, .faded-leave-to {
   opacity: 0;
 }
 
@@ -164,13 +187,15 @@ export default {
     padding: 0;
 }
 
-form input:focus {
+form input:focus,
+form textarea:focus{
     background: rgba(0,0,0,.3);
     border-color: transparent;
     color: #fff;
 }
 
-form input:focus::placeholder {
+form input:focus::placeholder,
+form textarea:focus::placeholder {
     color: #fff;
 }
 

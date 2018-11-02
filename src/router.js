@@ -5,6 +5,7 @@ import Home from './views/Home.vue'
 import Profile from './views/Profile.vue'
 import SignIn from './views/SignIn.vue'
 import SignUp from './views/SignUp.vue'
+import AddPost from './views/addPost.vue'
 
 Vue.use(Router)
 
@@ -18,6 +19,20 @@ export default new Router({
       title: 'Главная',
       component: Home,
       access: true
+    },
+    {
+      path: '/addpost',
+      name: 'addpost',
+      title: 'Добавить пост',
+      component: AddPost,
+      access: true,
+      beforeEnter(from, to, next) {
+        if(store.getters.getUser !== null) {
+          next()
+        } else {
+          next('/signin')
+        }
+      }
     },
     {
       path: '/profile',

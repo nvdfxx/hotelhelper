@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuelidate from 'vuelidate'
 import firebase from 'firebase'
+import 'firebase/firestore'
 import Uimini from 'uimini/dist/css/uimini.css' 
 
 import router from './router'
@@ -25,6 +26,13 @@ new Vue({
       messagingSenderId: "36450160781"
     };
     firebase.initializeApp(config);
+
+    Vue.$db = firebase.firestore();
+
+    Vue.$db.settings({
+      timestampsInSnapshots: true
+    });
+
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         console.log('User is signed in')
