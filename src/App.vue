@@ -105,7 +105,8 @@ export default {
    font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: url('./assets/signin-bg.jpg') no-repeat center / cover
+  background: url('./assets/signin-bg.jpg') no-repeat center / cover;
+  background-attachment: fixed;
 }
 
 .fade-enter-active, .fade-leave-active {
@@ -164,7 +165,13 @@ export default {
 }
 
 form input:focus {
-    box-shadow: 0 0 50px #fff inset;
+    background: rgba(0,0,0,.3);
+    border-color: transparent;
+    color: #fff;
+}
+
+form input:focus::placeholder {
+    color: #fff;
 }
 
 </style>
